@@ -75,6 +75,12 @@ void print_float_array(float *array, int size) {
     printf("%.1f\n", array[size-1]);
 }
 
+void print_matrix(float *array, int rows, int columns) {
+    for(int i = 0; i < rows; i++) {
+        print_float_array(array + (i*columns), columns);
+    }
+}
+
 void cleanup(input_arrays_t *input, output_array_t *output) {
     free(input->x);
     free(input->b);
@@ -134,8 +140,8 @@ int main(int argc, char *argv[]) {
 
     output_array_manipulation(input, output);
 
-    printf("new y array = ");
-    print_float_array(output->y, (n*n));
+    printf("new y array =\n");
+    print_matrix(output->y, n, n);
 
     printf("done");
     cleanup(input, output);
